@@ -16,7 +16,7 @@ class _CityListScreenState extends State<CityListScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Where do you want to travel?",
           style: TextStyle(color: Colors.white, fontSize: 25),
         ),
@@ -25,68 +25,82 @@ class _CityListScreenState extends State<CityListScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          child: Column(children: [
-            Text("Best Deals", style: TextStyle(color: Colors.black, fontSize: 50, fontWeight: FontWeight.w700),),
-            SizedBox(width: 50,),
+            child: Column(
+          children: [
+            const Text(
+              "Best Deals",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 50,
+                  fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(
+              width: 50,
+            ),
             FutureBuilder<List<City>>(
-            future: Cityy.getData(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      final city = snapshot.data![index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CityDetailScreen(city: city),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.network(city.imageUrl ?? "",
-                                width: 100, height: 100),
-                            SizedBox(height: 10),
-                            Text(city.name ?? "", style: TextStyle(fontSize: 18)),
-                            Text("${city.country}",
-                                style: TextStyle(color: Colors.grey)),
-                            Text("${city.price}", style: TextStyle(fontSize: 16)),
-                            Text("${city.rating} ",
-                                style: TextStyle(color: Colors.orange)),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                  
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text("${snapshot.error}"));
-              }
+              future: Cityy.getData(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        final city = snapshot.data![index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CityDetailScreen(city: city),
+                              ),
+                            );
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(city.imageUrl ?? "",
+                                  width: 100, height: 100),
+                              const SizedBox(height: 10),
+                              Text(city.name ?? "",
+                                  style: const TextStyle(fontSize: 18)),
+                              Text("${city.country}",
+                                  style: const TextStyle(color: Colors.grey)),
+                              Text("${city.price}",
+                                  style: const TextStyle(fontSize: 16)),
+                              Text("${city.rating} ",
+                                  style: const TextStyle(color: Colors.orange)),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(child: Text("${snapshot.error}"));
+                }
 
-              return Center(child: CircularProgressIndicator());
-            },
-          ),
-          Column(),
-          Row(
-            children: [
-              SizedBox(width: 110,),
-          Text("Bizning otzovlarimiz 15394 ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),),
-          Icon(Icons.favorite)
-
-            ],
-          )
-          ],)
-          
-        ),
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+            const Row(
+              children: [
+                SizedBox(
+                  width: 110,
+                ),
+                Text(
+                  "Bizning otzovlarimiz 15394 ",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w300),
+                ),
+                Icon(Icons.favorite)
+              ],
+            )
+          ],
+        )),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
